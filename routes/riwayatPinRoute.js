@@ -20,7 +20,7 @@ router.post("/kirimRiwayatPin", async (req, res) => {
   });
 
   try {
-    const result = await newData.save();
+    const result = await newRiwayatPin.save();
     console.log("Berhasil menyimpan data semua:", result);
     res.status(200).json({ message: "Berhasil menyimpan data semua" });
   } catch (err) {
@@ -31,7 +31,7 @@ router.post("/kirimRiwayatPin", async (req, res) => {
 
 router.get("/getRiwayatPin", async (req, res) => {
   try {
-    const data = await Data.find({});
+    const data = await RiwayatPin.find({});
     console.log("Berhasil mengambil data all");
     res.status(200).json(data);
   } catch (err) {
