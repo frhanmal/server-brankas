@@ -4,13 +4,12 @@ const dataSchema = new mongoose.Schema(
   {
     status_pintu: String,
     teks_asli: String,
-    encryptedText: String,
+    teks_enkripsi: String,
     teks_dekripsi: String,
-    riwayat_pin: String,
     pin_lama: String,
-    encryptedText2: String,
+    teks_enkripsi_sebelum: String,
     pin_baru: String,
-    encryptedText3: String,
+    teks_enkripsi_sesudah: String,
   },
   {
     timestamps: true,
