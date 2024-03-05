@@ -5,18 +5,18 @@ const RiwayatPin = require("../models/dbRiwayatPin");
 router.post("/kirimRiwayatPin", async (req, res) => {
   const {
     pinLama,
-    encrypted2,
+    encryptedText2,
     pinBaru,
-    encrypted3,
+    encryptedText3,
  } = req.body;
 
   const timestamp = new Date();
 
   const newRiwayatPin = new RiwayatPin({
     pin_lama: pinLama,
-    encryptedText2: encrypted2,
+    encryptedText2: encryptedText2,
     pin_baru: pinBaru,
-    encryptedText3: encrypted3,
+    encryptedText3: encryptedText3,
   });
 
   try {
