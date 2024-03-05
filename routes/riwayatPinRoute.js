@@ -14,9 +14,9 @@ router.post("/kirimRiwayatPin", async (req, res) => {
 
   const newRiwayatPin = new RiwayatPin({
     pin_lama: pinLama,
-    encryptedText: encrypted2,
+    encryptedText2: encrypted2,
     pin_baru: pinBaru,
-    encryptedText: encrypted3,
+    encryptedText3: encrypted3,
   });
 
   try {
