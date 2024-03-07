@@ -39,7 +39,7 @@ router.post("/kirimData", async (req, res) => {
 
 router.get("/getDataAll", async (req, res) => {
   try {
-    const data = await Data.find({});
+    const data = await Data.find({}).sort({ createdAt: -1 });
     console.log("Berhasil mengambil data all");
     res.status(200).json(data);
   } catch (err) {
