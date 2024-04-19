@@ -58,7 +58,7 @@ router.get("/getNewData", async (req, res) => {
     const newData = data.map((item) => ({
       _id: item._id,
       teks_enkripsi: item.teks_enkripsi,
-      teks_enkripsi2: decrypt(item.teks_enkripsi, aesKey, aesIv).replace(
+      teks_dekripsi: decrypt(item.teks_enkripsi, aesKey, aesIv).replace(
         /\0/g,
         ""
       ),
