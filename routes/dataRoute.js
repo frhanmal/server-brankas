@@ -19,27 +19,13 @@ function decrypt(encryptedBase64Text, key, iv) {
 
 router.post("/kirimData", async (req, res) => {
   const {
-    status_pintu,
-    teks_asli,
     teks_enkripsi,
-    teks_dekripsi,
-    pinLama,
-    teks_enkripsi_sebelum,
-    pinBaru,
-    teks_enkripsi_sesudah,
   } = req.body;
 
   const timestamp = new Date();
 
   const newData = new Data({
-    status_pintu: status_pintu,
-    teks_asli: teks_asli,
     teks_enkripsi: teks_enkripsi,
-    teks_dekripsi: teks_dekripsi,
-    pin_lama: pinLama,
-    teks_enkripsi_sebelum: teks_enkripsi_sebelum,
-    pin_baru: pinBaru,
-    teks_enkripsi_sesudah: teks_enkripsi_sesudah,
   });
 
   try {
@@ -49,8 +35,10 @@ router.post("/kirimData", async (req, res) => {
   } catch (err) {
     console.log("Gagal menyimpan data semua:", err);
     res.status(500).json({ message: "Gagal menyimpan data semua" });
-  }
+  } 
 });
+
+
 
 router.get("/getDataAll", async (req, res) => {
   try {
