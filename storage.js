@@ -26,6 +26,6 @@ app.use("/api/data", dataRoute);
 app.use("/api/riwayatpin", riwayatPinRoute);
 app.use("/api/user", userRoute);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log("Server Sensor is running on port", port));
