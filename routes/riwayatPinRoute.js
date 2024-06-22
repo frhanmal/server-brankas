@@ -17,6 +17,35 @@ function decrypt(encryptedBase64Text, key, iv) {
   return decrypted;
 }
 
+router.get("/getPIN", async (req, res) => {
+  try {
+    const data = await RiwayatPin.find({}).sort({ createdAt: -1 });
+
+    const newData = data.map((item) => ({
+      _id: item._id,
+      encryptedText2: item.encryptedText2,
+      pin_lama: decrypt(item.encryptedText2, aesKey, aesIv).replace(
+        /\0/g,
+        ""
+      ),
+      encryptedText3: item.encryptedText3,
+      pin_baru: decrypt(item.encryptedText3, aesKey, aesIv).replace(
+        /\0/g,
+        ""
+      ),
+      createdAt: item.createdAt,
+      updatedAt: item.updatedAt,
+    }));
+
+    console.log("Berhasil mengambil data ");
+    res.status(200).json(newData);
+  } catch (err) {
+    console.log("Gagal mengambil data :", err);
+    res.status(500).json({
+      message: "Gagal mengambil data",
+    });
+  }
+});
 
 router.post("/kirimRiwayatPin", async (req, res) => {
   const {
@@ -53,34 +82,6 @@ router.get("/getRiwayatPin", async (req, res) => {
 });
 
 
-router.get("/getPIN", async (req, res) => {
-  try {
-    const data = await RiwayatPin.find({}).sort({ createdAt: -1 });
 
-    const newData = data.map((item) => ({
-      _id: item._id,
-      encryptedText2: item.encryptedText2,
-      pin_lama: decrypt(item.encryptedText2, aesKey, aesIv).replace(
-        /\0/g,
-        ""
-      ),
-      encryptedText3: item.encryptedText3,
-      pin_baru: decrypt(item.encryptedText3, aesKey, aesIv).replace(
-        /\0/g,
-        ""
-      ),
-      createdAt: item.createdAt,
-      updatedAt: item.updatedAt,
-    }));
-
-    console.log("Berhasil mengambil data ");
-    res.status(200).json(newData);
-  } catch (err) {
-    console.log("Gagal mengambil data :", err);
-    res.status(500).json({
-      message: "Gagal mengambil data ",
-    });
-  }
-});
 
 module.exports = router;

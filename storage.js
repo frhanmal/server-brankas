@@ -3,7 +3,6 @@ const cors = require("cors");
 
 const dbConfig = require("./mongoDB");
 
-const encryptedRoute = require("./routes/encryptedRoute");
 const dataRoute = require("./routes/dataRoute");
 const riwayatPinRoute = require("./routes/riwayatPinRoute");
 const userRoute = require("./routes/userRoute");
@@ -21,7 +20,6 @@ app.get("/", async (req, res, next) => {
   });
 });
 
-app.use("/api/encrypted", encryptedRoute);
 app.use("/api/data", dataRoute);
 app.use("/api/riwayatpin", riwayatPinRoute);
 app.use("/api/user", userRoute);

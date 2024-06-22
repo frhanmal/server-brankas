@@ -1,18 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res) => {
-  const newUser = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
+  const { name, email, password } = req.body;
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
     const user = await newUser.save();
     console.log(user);
-    res.send("User Register Sucesfuly");
+    res.send("User Registered Successfully");
   } catch (error) {
     return res.status(400).json({ error });
   }
@@ -22,10 +27,13 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email });
 
     if (user) {
-      if (user.password === password) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+
+      if (isPasswordValid) {
+        console.log('Berhasil Login ${user}');
         res.send(user);
       } else {
         return res.status(400).json({ message: "Wrong Password" });
